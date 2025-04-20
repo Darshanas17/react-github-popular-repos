@@ -1,23 +1,23 @@
 import './index.css'
 
 const LanguageFilterItem = props => {
-  const {eachLanguage, onClickLanguageFilter, activeFilterId} = props
-  const {id, language} = eachLanguage
+  const {filterData, isActive, updateActiveFilter} = props
+  const {id, language} = filterData
+  const buttonClassName = isActive
+    ? 'filter-button active-filter'
+    : 'filter-button'
 
-  const activeFilterIdStyle = activeFilterId === id ? 'active-button' : ''
-
-  const activeLanguage = () => {
-    onClickLanguageFilter(id)
+  const onClickFilter = () => {
+    updateActiveFilter(id)
   }
 
   return (
-    <button
-      className={`button ${activeFilterIdStyle}`}
-      type="button"
-      onClick={activeLanguage}
-    >
-      {language}
-    </button>
+    <li className="filter-item">
+      <button type="button" className={buttonClassName} onClick={onClickFilter}>
+        {language}
+      </button>
+    </li>
   )
 }
+
 export default LanguageFilterItem
